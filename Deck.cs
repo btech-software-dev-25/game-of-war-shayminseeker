@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace GameOfWar
 {
     public class Deck
@@ -15,9 +17,14 @@ namespace GameOfWar
 
 
         // Create a public int property Count that returns the Count value from the private collection _cards
+        public int Count()
+        {
+            return _cards.Count;
+        }
 
 
         // Create a private field _cards that is a List<Card>
+        List<Card> _cards = new List<Card>();
 
 
         // Create a public constructor that takes two parameter: a List<card> called cards and a boolean value called isEmptyDeck
@@ -25,10 +32,41 @@ namespace GameOfWar
         // If cards is null or empty:
         //     _cards should be initialized as an empty List<Card>
         //     InitializeDeck() should be called if and only if isEmptyDeck is false
+        public Deck(List<Card> cards, bool isEmptyDeck)
+        {
+            if (cards != null)
+            {
+                cards = _cards;
+            } else if (isEmptyDeck == false) {
+                InitializeDeck();
+
+            }
+
+        }
 
 
         // Create a private void method called InitializeDeck() which does the following:
         // Use RankNames and Suits in nested loops to generate all 52 combinations of rank and suit and add them to _cards
+        private void InitializeDeck()
+        {
+            foreach (string suit in Suits)
+            {
+                foreach (string rank in RankNames)
+                {
+                    if (rank.Any(char.IsDigit)) {
+                        int.Parse(rank)
+                        _cards.Add(new Card(suit, rank));
+                    } else {
+                        _cards.Add(new Card(suit, rank));
+                    }
+                    
+                    
+
+            }
+            
+            }
+            
+        }
 
 
         // Create a public void method called Shuffle() which shuffles (rearranges) the cards in _cards
